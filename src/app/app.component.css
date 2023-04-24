@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  text-align: center;
+}
+
+a {
+  margin-right: 1em;
+  margin-left: 1em;
+  color: white;
+}
+
+.principal {
+    background: linear-gradient(to left, #2e2d2d, #0b0b0b);
+}
+
+.menu{ 
+  height: 5vh;
+  text-align: right;
+}
+
