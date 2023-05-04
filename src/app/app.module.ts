@@ -5,12 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { Express} from 'express';
+import { BodyParser } from 'body-parser';
+import { UploadFileComponent } from './auth/views/upload-file/upload-file.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    UploadFileComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,15 @@ const validateLoginData = (username, password) => {
   }
 };
 
+// Función para validar los datos de registro de usuario
+const validateRegisterData = (username, email, password) => {
+  if (!username || !email || !password) {
+    throw new Error(
+      "Nombre de usuario, correo electrónico y contraseña requeridos"
+    );
+  }
+};
+
 // Controlador de autenticación
 class AuthController {
   // Método para iniciar sesión
@@ -36,7 +45,32 @@ class AuthController {
       });
     });
   }
-  
+
+  // Método para registrar un nuevo usuario
+  register(username, email, password) {
+    // Validar los datos de entrada
+    validateRegisterData(username, email, password);
+
+    // Verificar que no exista un usuario con el mismo nombre o correo electrónico
+    return User.findOne({
+      $or: [{ username: username }, { email: email }],
+    }).then((user) => {
+      if (user) {
+        throw new Error("Nombre de usuario o correo electrónico ya existen");
+      }
+
+      // Encriptar la contraseña
+      return bcrypt.hash(password, 10).then((hash) => {
+        // Crear el usuario en la base de datos
+        const user = new User({
+          username: username,
+          email: email,
+          password: hash,
+        });
+        return user.save();
+      });
+    });
+  }
 }
 
 module.exports = AuthController;
